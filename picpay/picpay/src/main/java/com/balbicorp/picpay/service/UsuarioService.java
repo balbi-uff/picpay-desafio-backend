@@ -6,6 +6,8 @@ import com.balbicorp.picpay.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UsuarioService {
 
@@ -17,5 +19,8 @@ public class UsuarioService {
         return repository.save(usuario_a_ser_criado);
     }
 
+    public Optional<Usuario> getUsuarioNoBanco(Long id){
+        return repository.findById(id);
+    }
 
 }

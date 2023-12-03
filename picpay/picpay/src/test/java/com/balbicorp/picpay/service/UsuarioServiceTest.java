@@ -16,10 +16,11 @@ class UsuarioServiceTest {
 
     @Test
     void cadastrarUsuarioNoBanco() {
-        Long id_teste = 789L;
-        UsuarioDTO dto = new UsuarioDTO(id_teste, "1234", "j@gmail.com", 'L', "Joca", "Job", "12345", 1545L);
+        String expected_code = "1234";
+        UsuarioDTO dto = new UsuarioDTO(expected_code, "j@gmail.com", 'L', "Joca", "Job", "12345", 1545L);
 
-        service.cadastrarUsuarioNoBanco(dto);
-        assertTrue(service.repository.existsById(id_teste));
+        Usuario user = service.cadastrarUsuarioNoBanco(dto);
+
+        assertNotNull(service.getUsuarioNoBanco(user.getId()));
     }
 }

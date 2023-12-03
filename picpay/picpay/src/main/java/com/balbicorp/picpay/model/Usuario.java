@@ -31,7 +31,6 @@ public class Usuario {
     Long saldo;
 
     public Usuario(UsuarioDTO dto){
-        this.id=dto.id();
         this.codigo=dto.codigo();
         this.email=dto.email();
         this.tipo=dto.tipo();
