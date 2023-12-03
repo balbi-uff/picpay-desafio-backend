@@ -4,6 +4,7 @@ import com.balbicorp.picpay.dto.UsuarioDTO;
 import com.balbicorp.picpay.model.Usuario;
 import com.balbicorp.picpay.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -16,7 +17,13 @@ public class UsuarioService {
 
     public Usuario cadastrarUsuarioNoBanco(UsuarioDTO usuarioDTO){
         Usuario usuario_a_ser_criado = new Usuario(usuarioDTO);
-        return repository.save(usuario_a_ser_criado);
+        try {
+            return repository.save(usuario_a_ser_criado);
+        } catch (DataIntegrityViolationException e){
+            throw new DataIntegrityViolationException("Falha ao criar usuário: ", e);
+        }
+
+
     }
 
     public Optional<Usuario> getUsuarioNoBanco(Long id){
